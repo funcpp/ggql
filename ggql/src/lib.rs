@@ -46,3 +46,20 @@ macro_rules! node_interface {
         }
     };
 }
+
+pub trait ResultExt<T, E> {
+    fn map_into<U, F>(self) -> Result<U, F>
+    where
+        T: Into<U>,
+        E: Into<F>;
+}
+
+impl<T, E> ResultExt<T, E> for Result<T, E> {
+    fn map_into<U, F>(self) -> Result<U, F>
+    where
+        T: Into<U>,
+        E: Into<F>,
+    {
+        self.map(Into::into).map_err(Into::into)
+    }
+}
