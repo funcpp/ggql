@@ -1,0 +1,9 @@
+[package]
+name = "ggql"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+base64 = "0.22.1"
+async-graphql = { version = "7.0.11" }
+ggql_derive = { path = "../ggql-derive" }
