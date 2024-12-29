@@ -36,7 +36,7 @@ macro_rules! node_interface {
                 match ty {
                     $(
                         $variant::NODE_NAME => {
-                            let item = $getter(ctx, id);
+                            let item = $getter(ctx, id)?;
                             Ok($enum_name::$variant(item))
                         },
                     )*
