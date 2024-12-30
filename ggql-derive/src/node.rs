@@ -34,9 +34,10 @@ pub fn generate(node_args: &args::Node) -> GeneratorResult<TokenStream> {
             }
 
             fn node_id(&self) -> async_graphql::ID {
-                use base64::{engine::general_purpose::STANDARD as base64, Engine as _};
+                //use base64::{engine::general_purpose::STANDARD as base64, Engine as _};
+                //async_graphql::ID::from(base64.encode(format!("{}#{}", self.node_name(), self.#id_field_name)))
 
-                async_graphql::ID::from(base64.encode(format!("{}#{}", self.node_name(), self.#id_field_name)))
+                ggql::goid::generate_goid(Self::NODE_NAME, &self.#id_field_name)
             }
         }
     };
