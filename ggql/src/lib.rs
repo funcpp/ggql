@@ -44,6 +44,17 @@ macro_rules! node_interface {
                 }
             }
         }
+
+        $(
+        impl From<$enum_name> for $variant {
+            fn from(node: $enum_name) -> Self {
+                match node {
+                    $enum_name::$variant(inner) => inner,
+                    _ => unreachable!(),
+                }
+            }
+        }
+        )*
     };
 }
 
