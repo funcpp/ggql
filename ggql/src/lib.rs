@@ -33,7 +33,7 @@ macro_rules! node_interface {
                     Err(e) => return Err(e.into()),
                 };
 
-                match ty {
+                match ty.as_str() {
                     $(
                         $variant::NODE_NAME => {
                             let item = $getter(ctx, id)?;
