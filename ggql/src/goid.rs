@@ -3,9 +3,9 @@ use std::fmt::Display;
 use base64::{engine::general_purpose::STANDARD as base64, Engine as _};
 
 pub fn parse_goid(goid: &async_graphql::ID) -> Result<(&str, i32), String> {
-    let parts: Vec<&str> = goid.split('#').collect();
+    let parts: Vec<&str> = goid.as_str().split('#').collect();
     if parts.len() != 2 {
-        return Err(format!("Failed to parse id: {:?}", goid).into());
+        return Err(format!("Failed to parse id: {:?}, parts: {:?}", goid, parts).into());
     }
 
     let ty = parts[0];
