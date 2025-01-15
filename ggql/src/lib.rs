@@ -1,4 +1,5 @@
 pub mod goid;
+pub mod page;
 
 pub use ggql_derive::*;
 

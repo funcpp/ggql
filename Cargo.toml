@@ -1,5 +1,6 @@
 [workspace]
 resolver = "2"
-members = [ "ggql",
-    "ggql-derive", "tests",
+members = [ 
+    "ggql",
+    "ggql-derive",
 ]
