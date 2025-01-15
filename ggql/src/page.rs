@@ -3,19 +3,32 @@ use std::borrow::Cow;
 use async_graphql::{InputObject, Object, OutputType, SimpleObject, TypeName};
 
 #[derive(InputObject)]
+pub struct PageArgumentsInput {
+    pub offset: i32,
+    pub limit: i32,
+}
+
+#[derive(SimpleObject)]
 pub struct PageArguments {
     pub offset: i32,
     pub limit: i32,
 }
 
-#[Object]
-impl PageArguments {
-    async fn offset(&self) -> i32 {
-        self.offset
+impl From<PageArgumentsInput> for PageArguments {
+    fn from(input: PageArgumentsInput) -> Self {
+        Self {
+            offset: input.offset,
+            limit: input.limit,
+        }
     }
+}
 
-    async fn limit(&self) -> i32 {
-        self.limit
+impl From<PageArguments> for PageArgumentsInput {
+    fn from(arguments: PageArguments) -> Self {
+        Self {
+            offset: arguments.offset,
+            limit: arguments.limit,
+        }
     }
 }
 
