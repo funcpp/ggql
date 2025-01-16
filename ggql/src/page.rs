@@ -1,6 +1,5 @@
+use async_graphql::*;
 use std::borrow::Cow;
-
-use async_graphql::{InputObject, OutputType, SimpleObject, TypeName};
 
 #[derive(SimpleObject, InputObject)]
 #[graphql(input_name = "PageArgumentsInput")]
@@ -28,5 +27,20 @@ impl<T: OutputType> Page<T> {
 impl<T: OutputType> TypeName for Page<T> {
     fn type_name() -> Cow<'static, str> {
         format!("{}Page", T::type_name()).into()
+    }
+}
+
+#[Object(name_type)]
+impl<T: OutputType> Page<T> {
+    async fn items(&self) -> &[T] {
+        &self.items
+    }
+
+    async fn total(&self) -> i32 {
+        self.total
+    }
+
+    async fn arguments(&self) -> Option<&PageArguments> {
+        self.arguments.as_ref()
     }
 }
